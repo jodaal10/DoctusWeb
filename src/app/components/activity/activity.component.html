@@ -1,0 +1,85 @@
+<div class="container col-md-10 offset-md-1 jumbotron">    
+        <div class="body-content">
+            <label for="Descripcion">Descripción:</label>
+            <div class="form-inline">
+                <input type="text" class="form-control col-5" id="txtDescripcion" placeholder="Descripción" [(ngModel)]="actividad.descripcion"/>
+                <button type="button" id="btnCrearActividad" class="btn btn-primary btn-xs pull-right" (click)="registraractividad()">+ Crear Actividad</button>
+            </div>
+        </div>
+        <br />
+        <table class="table table-striped custab">
+        <thead>
+            <tr>
+                <th>Código Actividad</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+                <tr *ngFor="let actividad of actividades">
+                    <td>{{actividad.idActividad}}</td>
+                    <td>{{actividad.descripcion}}</td>
+                    <td><button type="button" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#myModal" (click)="AddHoras(actividad.idActividad)"> Agregar Horas</button>
+                        <button type="button" class="btn btn-danger btn-xs" (click)="EliminarActividad(actividad.IdActividad)"> Eliminar</button></td>
+                </tr>
+        </table>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Agregar Horas</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="timeForm" (ngSubmit)="CrearTiempo()">
+                            <div class="form-group" hidden="true">
+                                <label for="Codigo">Código de actividad:</label>
+                                <input type="text" class="form-control" formControlName="IdActividad" id="IdActividad" disabled="disabled"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="Fecha">Fecha:</label>
+                                <input type="date" class="form-control date" formControlName="Fecha" id="Fecha" placeholder="yyyy-MM-dd" required [ngClass]="{ 'is-invalid': submitted && f.Fecha.errors }"/>
+                                <div *ngIf="submitted && f.Fecha.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Fecha.errors.required">El campo Fecha es requerido</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="Horas">Horas</label>
+                                <input type="number" class="form-control" formControlName="Tiempo" id="Tiempo" placeholder="Horas" required [ngClass]="{ 'is-invalid': submitted && f.Tiempo.errors }" />
+                                <div *ngIf="submitted && f.Tiempo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.Tiempo.errors.required">El campo Horas es requerido</div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" id="btnAgregar" class="btn btn-primary">Agregar</button>
+                            </div>
+                        </form>
+                    
+                    <table class="table table-striped custab">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Fecha
+                                </th>
+                                <th>
+                                    Horas
+                                </th>
+                                <th>
+                                    Acciones
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbodyTiempos">
+                            <tr *ngFor="let time of tiempos"style="text-align:left">
+                                <td>{{time.fecha}}</td>
+                                <td>{{time.tiempo}}</td>
+                                <td><button type="button" class="btn btn-danger btn-xs" (click)="EliminarTiempo(time.IdTiempo)"> Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="regresar()">Regresar</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
