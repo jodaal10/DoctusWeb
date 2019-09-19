@@ -19,7 +19,7 @@
                     <td>{{actividad.idActividad}}</td>
                     <td>{{actividad.descripcion}}</td>
                     <td><button type="button" class="btn btn-info btn-xs"  data-toggle="modal" data-target="#myModal" (click)="AddHoras(actividad.idActividad)"> Agregar Horas</button>
-                        <button type="button" class="btn btn-danger btn-xs" (click)="EliminarActividad(actividad.IdActividad)"> Eliminar</button></td>
+                        <button type="button" class="btn btn-danger btn-xs" (click)="EliminarActividad(actividad.idActividad)"> Eliminar</button></td>
                 </tr>
         </table>
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -71,7 +71,7 @@
                             <tr *ngFor="let time of tiempos"style="text-align:left">
                                 <td>{{time.fecha}}</td>
                                 <td>{{time.tiempo}}</td>
-                                <td><button type="button" class="btn btn-danger btn-xs" (click)="EliminarTiempo(time.IdTiempo)"> Eliminar</button></td>
+                                <td><button type="button" class="btn btn-danger btn-xs" (click)="EliminarTiempo(time.idTiempo)"> Eliminar</button></td>
                             </tr>
                         </tbody>
                     </table>
